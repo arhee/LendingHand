@@ -1,0 +1,133 @@
+<html>  
+  <head>
+
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Current Lending Club Loans</title>
+
+      <!-- Bootstrap Core CSS -->
+      <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Custom CSS -->
+      <link href="/static/css/stylish-portfolio.css" rel="stylesheet">
+
+      <!-- Custom Fonts -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+      <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+      <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">   
+
+      <!-- Sortable tables -->
+      <script src="static/js/jquery-1.12.0.min.js"></script>
+      <script src="static/js/jquery.dataTables.min.js"></script>
+      <link rel="stylesheet" href="static/css/jquery.dataTables.min.css">
+
+
+      <!-- NVD3 -->
+      <link rel="stylesheet" href="static/css/nv.d3.1.css">
+
+
+
+      <!-- For Dynamic Tables -->
+      <script>    
+      $(document).ready(function(){
+          $('#example').dataTable();
+      });
+      </script>
+
+      <!-- Retrieve loans variable from flask -->
+      <script type="text/javascript">
+        var loans = {{ loans|tojson }};
+      </script>
+      
+
+      <style>
+      body {
+          background-color: #FFFFFF;
+      }
+
+      </style>
+
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1>Current Lending Club Loans</h1>
+        <br><br>
+      </div>
+      <div class="row">
+        <div class="col-md-1 side" style="outline: 1px black"></div>
+        <div class="col-md-10">
+          <div id="chart" ></div>
+          <div class="table-responsive">
+          <table id="example" class="display">
+            <thead>
+              <tr>
+                {% for key, value in loans[0].iteritems() %}
+                {% if key == "variance" %}
+                  <td><b> Risk (Variance) </b></td>
+                {% elif key == "exp_int_rate" %}
+                  <td><b> Return (NAR) </b></td>
+
+                {% elif key == "grade" %}
+                  <td><b> Grade </b></td>
+
+                {% elif key == "term" %}
+                  <td><b> Months </b></td>
+
+                {% elif key == "loanAmount" %}
+                  <td><b> Principal (USD) </b></td>                  
+                {% else %}
+                  <td><b>{{ key }}</b></td>
+                {% endif %}
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for loan in loans %}
+                <tr>
+                  {% for key, value in loan.iteritems() %}
+                    {% if key == "id" %}
+                      <td><a href="https://www.lendingclub.com/browse/loanDetail.action?loan_id={{value}}" target="_blank">{{ value }}</a></td>
+                    {% elif key == "variance" %}
+                      <td>{{ '%0.2f' | format(value|float) }}</td>
+                    {% elif key == "exp_int_rate" %}
+                      <td>{{ '%0.2f' | format(value|float) }}%</td>
+                    {% elif key == "loanAmount" %}
+                      <td>${{ value | int }}</td>
+                    {% else %}
+                      <td>{{ value }}</td>
+                    {% endif %}
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          </div>
+
+        </div>
+        <div class="col-md-1 side"></div>
+      </div>
+
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="static/js/nv.d3.js"></script>
+  <<script src="static/js/nvscatter.js"></script>
+
+  <script>
+    $('table#example').dataTable({});
+  </script>
+  </body>
+
+</html>
