@@ -16,9 +16,43 @@ body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+
+a
+{
+    color: white !important;
+}
+
+a:hover
+{
+    text-decoration: none;
+}
+
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+}
+
+.navbar-nav
+    {
+        padding-top:0px !important; 
+        padding-bottom:0px !important;
+    }
+
+.navbar {min-height:20px !important}
+
+
+.navbar-text{
+    font-size: 1.1em;
+    color: white !important;
+}
+
 .navbar{
     /*background: #244964;*/
-    background: #999999;
+    background: #555555;
 }
 
 .text-vertical-center {
