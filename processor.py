@@ -90,20 +90,7 @@ def run():
     default_model = pickle.load(open(default_model_fname))
     pymnt_dur_model = pickle.load(open(pymnt_dur_model_fname))
 
-
-    def_preds = default_model.predict_proba(X)
-    p_default, p_paid = zip(*def_preds)
-    pred_term = pymnt_dur_model.predict(X)
-
-    #place holder until linear model fixed
-
-    df['pred_def_term'] = pred_term
-    def_NAR = NAR.get_df_NAR(df, True)
-    paid_NAR = NAR.get_df_NAR(df)
-    pred_term = [20] * len(pred_term)
-
-    expNAR, varNAR = NAR.get_meanvar_NAR(p_paid, paid_NAR, def_NAR)
-
+    
     """
     Return NAR
     """

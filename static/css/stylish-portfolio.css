@@ -17,9 +17,15 @@ body {
 }
 
 
-a
-{
+
+
+
+.nav_tag{
     color: white !important;
+}
+
+.id_tag{
+    color: blue !important;
 }
 
 a:hover

@@ -64,8 +64,8 @@ nv.addGraph(function() {
         .color(d3.scale.category10().range())
         .duration(300)
         // Changing xlim/ylim
-        .forceY([-40, 40])
-        .forceX([0.1, 0.25])
+        .forceY([-40, 20])
+        .forceX([0.05, 0.12])
 
     ;
 

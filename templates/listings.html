@@ -9,11 +9,14 @@
 
       <title>Current Lending Club Loans</title>
 
+
       <!-- Bootstrap Core CSS -->
       <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
       <!-- Custom CSS -->
       <link href="/static/css/stylish-portfolio.css" rel="stylesheet">
+
+
 
       <!-- Custom Fonts -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -62,19 +65,23 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top" style="background:#555555">
-      <div class="container">
-        <p class="navbar-text"><a href="lendinghand.club">Home</a></p>
-        <p class="navbar-text"><a href="lendinghand.club/listings">Listings</a></p>
-        <p class="navbar-text"><a href="http://www.slideshare.net/AlexRhee/lendinghand-slides-58021450">Slides</a></p>
-        <p class="navbar-text">
-            <a href="https://github.com/arhee"><img src="static/images/GitHub.png"></a>
-        </p>
-        <p class="navbar-text">
-            <a href="httpsg://www.linkedin.com/in/alexrhee"><img src="static/images/LinkedIn-White-28.png"></a>
-        </p>
-      </div>
-    </nav>
+
+  <nav class="navbar navbar-default navbar-fixed-top" style="background:#555555">
+    <div class="container">
+      <p class="navbar-text"><a class="nav_tag" href="/">Home</a></p>
+      <p class="navbar-text"><a class="nav_tag" href="/listings">Listings</a></p>
+      <p class="navbar-text"><a class="nav_tag" href="http://www.slideshare.net/AlexRhee/lendinghand-slides-58021450">Slides</a></p>
+      <p class="navbar-text">
+          <a href="https://github.com/arhee"><img src="static/images/GitHub.png"></a>
+      </p>
+      <p class="navbar-text">
+          <a href="https://www.linkedin.com/in/alexrhee"><img src="static/images/LinkedIn-White-28.png"></a>
+      </p>
+    </div>
+  </nav>
+
+
+
 
     <br><br>
     <br><br>
@@ -104,7 +111,10 @@
                   <td><b> Months </b></td>
 
                 {% elif key == "loanAmount" %}
-                  <td><b> Principal (USD) </b></td>                  
+                  <td><b> Principal (USD) </b></td>
+                {% elif key == "id" %}
+                  <td><b> ID </b></td>                  
+
                 {% else %}
                   <td><b>{{ key }}</b></td>
                 {% endif %}
@@ -116,7 +126,7 @@
                 <tr>
                   {% for key, value in loan.iteritems() %}
                     {% if key == "id" %}
-                      <td><a href="https://www.lendingclub.com/browse/loanDetail.action?loan_id={{value}}" target="_blank">{{ value }}</a></td>
+                      <td><a class="id_tag" href="https://www.lendingclub.com/browse/loanDetail.action?loan_id={{value}}" target="_blank">{{ value }}</a></td>
                     {% elif key == "variance" %}
                       <td>{{ '%0.2f' | format(value|float) }}</td>
                     {% elif key == "exp_int_rate" %}

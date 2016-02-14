@@ -61,6 +61,7 @@ def get_meanvar_NAR(p_paid, NAR, def_NAR):
     expNAR = p_paid * NAR + p_def * def_NAR
     meanNAR = (NAR + def_NAR)/2
     varNAR = p_paid * (NAR - meanNAR)**2 + p_def * (def_NAR - meanNAR)**2
+    varNAR = varNAR /2
     return expNAR, varNAR
 
 def addNAR2df(default_model, dur_model, df, X, dummy=None):
@@ -75,7 +76,7 @@ def addNAR2df(default_model, dur_model, df, X, dummy=None):
     def_NAR = get_df_NAR(df, True)
     paid_NAR = get_df_NAR(df)
     expNAR, varNAR = get_meanvar_NAR(p_paid, paid_NAR, def_NAR)
-    df['expNAR'] = expNAR
-    df['varNAR'] = varNAR
+    df['expNAR'] = expNAR.values
+    df['varNAR'] = varNAR.values
     return df
     
